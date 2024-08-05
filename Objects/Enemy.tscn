@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://o3bombs1yuf3"]
+
+[ext_resource type="Script" path="res://Scripts/Enemy.gd" id="1_1oe6h"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_61vbx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_36u27"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="Enemy" type="Area3D"]
+transform = Transform3D(1.76, 0, 0, 0, 1.76, 0, 0, 0, 1.76, 32.2072, 13.4188, -224.307)
+script = ExtResource("1_1oe6h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_61vbx")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CSGCombiner3D"]
+material = SubResource("StandardMaterial3D_36u27")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.256675, 0.256675, 0, -0.256675, 0.256675, 0, 0, 0, 0.362993, 0.423927, 0.407509, 0)
+height = 1.04124
+cone = true
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.256675, -0.256675, 0, 0.256675, 0.256675, 0, 0, 0, 0.362993, -0.440096, 0.402861, 0)
+height = 1.04124
+cone = true
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_height_offset = -1.0
+avoidance_enabled = true
+use_3d_avoidance = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

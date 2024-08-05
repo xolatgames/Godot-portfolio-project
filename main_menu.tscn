@@ -1,0 +1,167 @@
+[gd_scene load_steps=12 format=3 uid="uid://bqmp6ovtbd6i5"]
+
+[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_1sf12"]
+[ext_resource type="PackedScene" uid="uid://b6yhhl6l6o7o7" path="res://Objects/Platforms/grass_platform.tscn" id="1_d1t33"]
+[ext_resource type="PackedScene" uid="uid://1b6rdysab4ri" path="res://Objects/Tree.tscn" id="2_imbco"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ftshn"]
+font_size = 32
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 0.466667)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wy1g1"]
+sky_top_color = Color(0.000432984, 0.614423, 0.999997, 1)
+sky_horizon_color = Color(1, 1, 1, 1)
+sky_curve = 0.713527
+ground_bottom_color = Color(0.426389, 0.769847, 1, 1)
+ground_horizon_color = Color(1, 1, 1, 1)
+ground_curve = 0.0273209
+sun_angle_max = 306.0
+sun_curve = 0.279911
+
+[sub_resource type="Sky" id="Sky_desgx"]
+sky_material = SubResource("ProceduralSkyMaterial_wy1g1")
+
+[sub_resource type="Environment" id="Environment_qah8n"]
+background_mode = 2
+sky = SubResource("Sky_desgx")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_lw715"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1nsn3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2okd7"]
+albedo_color = Color(0.643137, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jh1cw"]
+material = SubResource("StandardMaterial3D_2okd7")
+
+[node name="Main menu" type="CanvasLayer"]
+script = ExtResource("1_1sf12")
+metadata/_edit_vertical_guides_ = [576.0]
+
+[node name="Label" type="Label" parent="."]
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 576.0
+offset_bottom = 96.0
+text = "Godot portfolio project"
+label_settings = SubResource("LabelSettings_ftshn")
+vertical_alignment = 1
+
+[node name="small hint" type="Label" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -544.0
+offset_top = -72.0
+offset_right = -32.0
+offset_bottom = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Alt+Enter to enter into fullscreen mode))"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 32.0
+offset_top = 96.0
+offset_right = 576.0
+offset_bottom = 128.0
+bbcode_enabled = true
+text = "[u][color=#0055ff]This portfolio[/color][/u] was made by [u][color=#0055ff][url=\"http://xolatgames.ru/\"]xolatgames[/url][/color][/u]"
+
+[node name="Attribution" type="RichTextLabel" parent="."]
+offset_left = 800.0
+offset_top = 32.0
+offset_right = 1120.0
+offset_bottom = 224.0
+bbcode_enabled = true
+text = "[outline_color=#000000][outline_size=2][right]Thanks for sounds to 😉:
+ [u][color=#0055ff][url=\"http://www.filmcow.com/\"]FilmCow[/url][/color][/u],
+ [u][color=#0055ff][url=\"https://www.dillonbecker.com/\"]Dillon Becker[/url][/color][/u],
+[u][color=#0055ff][url=\"https://mayragandra.itch.io/\"]Mayra[/url][/color][/u]!
+
+And also thanks so much for music:
+[u][color=#0055ff][url=\"https://timbeek.com/\"]Timbeek.com[/url][/color][/u]! 😄[/right][/outline_size][/outline_color]
+"
+
+[node name="Start" type="Button" parent="."]
+offset_left = 32.0
+offset_top = 448.0
+offset_right = 544.0
+offset_bottom = 512.0
+mouse_default_cursor_shape = 2
+text = "What's here?"
+
+[node name="Don\'t start" type="Button" parent="."]
+offset_left = 32.0
+offset_top = 544.0
+offset_right = 544.0
+offset_bottom = 608.0
+mouse_default_cursor_shape = 2
+text = "No matter! I already leave this!"
+
+[node name="Demo scene" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Demo scene"]
+transform = Transform3D(-0.663926, -0.373899, 0.647612, 0, 0.866025, 0.5, -0.747798, 0.331963, -0.574977, 4.321, 4.381, -3.539)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Demo scene"]
+transform = Transform3D(0.594191, -0.570655, 0.566824, 0, 0.704721, 0.709485, -0.804324, -0.421569, 0.418739, 0, 2, 0)
+shadow_enabled = true
+shadow_normal_bias = 1.0
+shadow_opacity = 0.69
+directional_shadow_mode = 0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Demo scene"]
+environment = SubResource("Environment_qah8n")
+
+[node name="Player" type="RigidBody3D" parent="Demo scene"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2639, 0)
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+mass = 10.0
+angular_damp = 50.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Demo scene/Player"]
+mesh = SubResource("CapsuleMesh_lw715")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Demo scene/Player"]
+shape = SubResource("CapsuleShape3D_1nsn3")
+
+[node name="boot left" type="Marker3D" parent="Demo scene/Player"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Demo scene/Player/boot left"]
+transform = Transform3D(0.338916, 0, 0, 0, 0.116984, 0, 0, 0, 0.483769, -0.231101, -0.988778, 0)
+mesh = SubResource("BoxMesh_jh1cw")
+skeleton = NodePath("../..")
+
+[node name="boot right" type="Marker3D" parent="Demo scene/Player"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Demo scene/Player/boot right"]
+transform = Transform3D(0.338916, 0, 0, 0, 0.116984, 0, 0, 0, 0.483769, 0.231, -0.989, 0)
+mesh = SubResource("BoxMesh_jh1cw")
+skeleton = NodePath("../..")
+
+[node name="Grass platform" parent="Demo scene" instance=ExtResource("1_d1t33")]
+transform = Transform3D(15.9831, 0, 0, 0, 0.759281, 0, 0, 0, 15.9831, 0, 0, 0)
+
+[node name="Tree" parent="Demo scene" instance=ExtResource("2_imbco")]
+transform = Transform3D(2.69208, 0, 0, 0, 2.69208, 0, 0, 0, 2.69208, -4.92254, -0.13272, 4.88749)
+
+[node name="Tree2" parent="Demo scene" instance=ExtResource("2_imbco")]
+transform = Transform3D(2.20301, 0, 0, 0, 2.20301, 0, 0, 0, 2.20301, -4.47769, -0.13272, -5.09082)
+
+[node name="Tree3" parent="Demo scene" instance=ExtResource("2_imbco")]
+transform = Transform3D(1.94335, 0, 0, 0, 1.94335, 0, 0, 0, 1.94335, 4.72683, -0.132719, 4.42825)
+
+[connection signal="meta_clicked" from="RichTextLabel" to="." method="_on_meta_clicked"]
+[connection signal="meta_clicked" from="Attribution" to="." method="_on_meta_clicked"]
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Don\'t start" to="." method="_on_dont_start_pressed"]

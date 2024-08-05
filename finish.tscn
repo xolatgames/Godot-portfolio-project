@@ -1,0 +1,69 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxgw6g7ivqhlr"]
+
+[ext_resource type="Script" path="res://Scripts/finish scene.gd" id="1_ehefm"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ecsrp"]
+sky_top_color = Color(0.000432984, 0.614423, 0.999997, 1)
+sky_horizon_color = Color(1, 1, 1, 1)
+sky_curve = 0.713527
+ground_bottom_color = Color(0.426389, 0.769847, 1, 1)
+ground_horizon_color = Color(1, 1, 1, 1)
+ground_curve = 0.0273209
+sun_angle_max = 306.0
+sun_curve = 0.279911
+
+[sub_resource type="Sky" id="Sky_5ncot"]
+sky_material = SubResource("ProceduralSkyMaterial_ecsrp")
+
+[sub_resource type="Environment" id="Environment_kqhwk"]
+background_mode = 2
+sky = SubResource("Sky_5ncot")
+
+[node name="Finish" type="CanvasLayer"]
+script = ExtResource("1_ehefm")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -36.0
+offset_right = 128.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[b][outline_color=#000000][outline_size=6][center]You [b][color=#ff0000]did it![/color][/b] Get rest! [/center] 😉 [/outline_size][/outline_color][/b]"
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D"]
+transform = Transform3D(0.594191, -0.570655, 0.566824, 0, 0.704721, 0.709484, -0.804324, -0.421569, 0.418739, 0, 2, 0)
+shadow_enabled = true
+shadow_normal_bias = 1.0
+shadow_opacity = 0.69
+directional_shadow_mode = 0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Node3D"]
+environment = SubResource("Environment_kqhwk")
+
+[node name="Quit" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = 28.0
+offset_right = 128.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+text = "Yeap! You're employed!"
+
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
