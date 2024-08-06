@@ -1,4 +1,4 @@
-# Godot-portfolio-project
+# Godot portfolio project
 ## A simple 3D platformer
 
 https://github.com/user-attachments/assets/b4131fce-9c94-4623-bc6c-43d52846e65d
