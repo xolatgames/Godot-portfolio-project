@@ -22,7 +22,7 @@ func _process(delta) -> void:
 			$Label.show()
 			
 			if !activate:
-				$AudioStreamPlayer3D.play()
+				$WOW.play()
 				activate = true
 			
 			return

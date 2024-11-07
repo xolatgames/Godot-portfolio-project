@@ -8,6 +8,7 @@ func _ready() -> void:
 		music.name = "Music"
 		music.stream = load("res://Music/Derp Loopable.wav")
 		music.volume_db = -10
+		music.bus = "Music"
 		Global.add_child(music)
 		
 		await get_tree().process_frame

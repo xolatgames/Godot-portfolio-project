@@ -580,3 +580,4 @@ transform = Transform3D(0.207, 0, 0, 0, 0.207, 0, 0, 0, 0.207, 31.3669, 0.009, -
 [node name="LoseSound" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("12_1ijrg")
+bus = &"Sounds"
