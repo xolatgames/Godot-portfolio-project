@@ -1,7 +1,7 @@
 # Godot portfolio project
 ## A simple 3D platformer
 
-https://github.com/user-attachments/assets/e11d6904-69d7-420c-b551-544eab10c7f7
+https://github.com/user-attachments/assets/b8198b6c-6634-4926-b2f8-86d8f053ce6f
 
 ### Thanks for sounds to 😉:
  - http://www.filmcow.com/ (FilmCow)
