@@ -1,18 +1,23 @@
-extends Area3D
+class_name Enemy extends Area3D
 
-var speed = 5
-var seeing_distance = 30
+const seeing_distance: float = 30
+const speed: float = 5
 
 var speed_delta : float
 
-@onready var agent = $NavigationAgent3D
+@onready var agent: NavigationAgent3D
 
-func _process(delta):
+
+func _ready() -> void:
+	agent = get_node("NavigationAgent3D")
+
+
+func _process(delta) -> void:
 	if global_position.distance_to(Global.player.global_position) < seeing_distance:
 		agent.target_position = Global.player.global_position
 
 
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	if agent.is_navigation_finished():
 		return
 	
@@ -22,10 +27,10 @@ func _physics_process(delta):
 	agent.velocity = global_position.direction_to(agent.get_next_path_position()) * speed_delta
 
 
-func _on_navigation_agent_3d_velocity_computed(safe_velocity):
+func _on_navigation_agent_3d_velocity_computed(safe_velocity) -> void:
 	global_position = global_position.move_toward(global_position + safe_velocity, speed_delta)
 
 
-func _on_body_entered(body):
-	if body.name == "Player":
+func _on_body_entered(body) -> void:
+	if body.is_in_group("player"):
 		Global.lose()

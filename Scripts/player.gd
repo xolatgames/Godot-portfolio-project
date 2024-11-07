@@ -1,21 +1,25 @@
-extends RigidBody3D
+class_name Player extends RigidBody3D
 
-var mouse_sensitivity = 0.8
-var mouse_look_x_limit = 89
+#How much you can turn your head to top, and to bottom in degrees
+const mouse_look_x_limit: float = 89
 
-var walk_speed = 150
-var run_speed = 200
-var jump_force = 500
+const mouse_sensitivity: float = 0.8
 
-var jumps_amount = 0
+const walk_speed: float = 150
+const run_speed: float = 200
+const jump_force: float = 500
 
-var deep_of_abyss = -50
+#If you fall into the abyss - you'll lose!
+const deep_of_abyss: float = -50
 
-func _ready():
+var jumps_amount: int = 0
+
+
+func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
-func _input(event):
+func _input(event) -> void:
 	if event is InputEventMouseMotion:
 		apply_torque(Vector3(0, - event.relative.x * mouse_sensitivity * 50, 0))
 		
@@ -23,7 +27,7 @@ func _input(event):
 		$Camera3D.rotation_degrees.x = clamp($Camera3D.rotation_degrees.x, -mouse_look_x_limit, mouse_look_x_limit)
 
 
-func _process(delta):
+func _process(delta) -> void:
 	movement()
 	changing_animation()
 	
@@ -34,16 +38,16 @@ func _process(delta):
 		Global.lose()
 
 
-func _on_grounded_body_entered(body):
+func _on_grounded_body_entered(body) -> void:
 	jumps_amount = 3
 
 
-func _on_jumping_timeout():
+func _on_jumping_timeout() -> void:
 	jump()
 
 
-func movement():
-	var speed = walk_speed
+func movement() -> void:
+	var speed: float = walk_speed
 	
 	if Input.is_action_pressed("run"):
 		speed = run_speed
@@ -67,7 +71,7 @@ func movement():
 			$Jumping.start()
 
 
-func changing_animation():
+func changing_animation() -> void:
 	if linear_velocity.y > 0.5:
 		$AnimationPlayer.play("jumping")
 		return
@@ -83,8 +87,8 @@ or linear_velocity.z > 0.5 or linear_velocity.z < -0.5:
 		$AnimationPlayer.play("idle")
 
 
-func play_footstep_sound():
-	var platforms = $Grounded.get_overlapping_bodies()
+func play_footstep_sound() -> void:
+	var platforms: Array[Node3D] = $Grounded.get_overlapping_bodies()
 	
 	for i in platforms:
 		if i.is_in_group("bricks"):
@@ -100,7 +104,7 @@ func play_footstep_sound():
 			break
 
 
-func jump():
+func jump() -> void:
 	if jumps_amount > 0:
 		apply_central_force(Vector3(0, jump_force * 10, 0))
 		

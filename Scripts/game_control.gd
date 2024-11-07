@@ -1,8 +1,9 @@
-extends Node3D
+class_name Game extends Node3D
 
-func _ready():
+
+func _ready() -> void:
 	if !Global.has_node("Music"):
-		var music = AudioStreamPlayer.new()
+		var music: AudioStreamPlayer = AudioStreamPlayer.new()
 		music.process_mode = Node.PROCESS_MODE_ALWAYS
 		music.name = "Music"
 		music.stream = load("res://Music/Derp Loopable.wav")
@@ -13,11 +14,11 @@ func _ready():
 		
 		music.play()
 	
-	Global.player = $Player
-	$Player.global_position = Global.respawn_position
+	Global.player = get_node("Player")
+	get_node("Player").global_position = Global.respawn_position
 
 
-func _process(delta):
+func _process(delta) -> void:
 	$CanvasLayer/AnimationPlayer.animation_finished
 	
 	if Input.is_action_just_pressed("quit_game"):
