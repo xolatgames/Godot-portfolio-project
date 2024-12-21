@@ -1,7 +1,7 @@
 # Godot portfolio project
 ## A simple 3D platformer
 
-## This repository was moved to https://gitlab.com/xolatgames/godot-portfolio-project !
+### This repository was moved to https://gitlab.com/xolatgames/godot-portfolio-project !
 
 https://github.com/user-attachments/assets/b8198b6c-6634-4926-b2f8-86d8f053ce6f
 
